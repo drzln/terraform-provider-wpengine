@@ -3,12 +3,12 @@
 page_title: "wpengine_resource Resource - terraform-provider-wpengine"
 subcategory: ""
 description: |-
-  Sample resource in the Terraform provider scaffolding.
+  Sample resource in the Terraform provider wpengine.
 ---
 
 # wpengine_resource (Resource)
 
-Sample resource in the Terraform provider scaffolding.
+Sample resource in the Terraform provider wpengine.
 
 
 

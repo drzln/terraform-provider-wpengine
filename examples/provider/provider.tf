@@ -1,6 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-provider "scaffolding" {
+provider "wpengine" {
   # example configuration here
 }

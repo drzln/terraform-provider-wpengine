@@ -13,7 +13,7 @@ import (
 func dataSourceScaffolding() *schema.Resource {
 	return &schema.Resource{
 		// This description is used by the documentation generator and the language server.
-		Description: "Sample data source in the Terraform provider scaffolding.",
+		Description: "Sample data source in the Terraform provider wpengine.",
 
 		ReadContext: dataSourceScaffoldingRead,
 
