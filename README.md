@@ -1,10 +1,10 @@
 # ⚠️ Archived
 
-This template is no longer being maintained and is now archived. We recommend using the [terraform-provider-scaffolding-framework](https://github.com/hashicorp/terraform-provider-scaffolding-framework) template repository built on the [Terraform Plugin Framework](https://developer.hashicorp.com/terraform/plugin/framework-benefits) for new provider development because it offers significant advantages compared to the SDKv2.
+This template is no longer being maintained and is now archived. We recommend using the [terraform-provider-wpengine-framework](https://github.com/hashicorp/terraform-provider-wpengine-framework) template repository built on the [Terraform Plugin Framework](https://developer.hashicorp.com/terraform/plugin/framework-benefits) for new provider development because it offers significant advantages compared to the SDKv2.
 
 # Terraform Provider Scaffolding (Terraform Plugin SDK)
 
-_This template repository is built on the [Terraform Plugin SDK](https://github.com/hashicorp/terraform-plugin-sdk). The template repository built on the [Terraform Plugin Framework](https://github.com/hashicorp/terraform-plugin-framework) can be found at [terraform-provider-scaffolding-framework](https://github.com/hashicorp/terraform-provider-scaffolding-framework)._
+_This template repository is built on the [Terraform Plugin SDK](https://github.com/hashicorp/terraform-plugin-sdk). The template repository built on the [Terraform Plugin Framework](https://github.com/hashicorp/terraform-plugin-framework) can be found at [terraform-provider-wpengine-framework](https://github.com/hashicorp/terraform-provider-wpengine-framework)._
 
 This repository is a *template* for a [Terraform](https://www.terraform.io) provider. It is intended as a starting point for creating Terraform providers, containing:
 
