@@ -42,70 +42,70 @@ func resourceWPEngineAccountUserCreate(ctx context.Context, d *schema.ResourceDa
 	return diags
 }
 
-// func resourceWPEngineAccountUserRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-// 	var diags diag.Diagnostics
-//
-// 	client := m.(*client.ApiClient)
-//
-// 	// Get the user ID from the resource data
-// 	userID := d.Id()
-//
-// 	// Call the client method to get the user details
-// 	user, err := client.GetAccountUser(userID)
-// 	if err != nil {
-// 		return diag.FromErr(err)
-// 	}
-//
-// 	// Set the resource data from the user details
-// 	d.Set("first_name", user["first_name"])
-// 	d.Set("last_name", user["last_name"])
-// 	d.Set("email", user["email"])
-//
-// 	return diags
-// }
+func resourceWPEngineAccountUserRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
 
-// func resourceWPEngineAccountUserUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-// 	var diags diag.Diagnostics
-//
-// 	client := m.(*client.ApiClient)
-//
-// 	userID := d.Id()
-//
-// 	// Check which fields have changed
-// 	if d.HasChanges("first_name", "last_name", "email") {
-// 		userData := map[string]interface{}{
-// 			"first_name": d.Get("first_name").(string),
-// 			"last_name":  d.Get("last_name").(string),
-// 			"email":      d.Get("email").(string),
-// 		}
-//
-// 		// Call the client method to update the user details
-// 		_, err := client.UpdateAccountUser(userID, userData)
-// 		if err != nil {
-// 			return diag.FromErr(err)
-// 		}
-// 	}
-//
-// 	// Call read to update the state
-// 	return resourceWPEngineAccountUserRead(ctx, d, m)
-// }
+	client := m.(*client.ApiClient)
 
-// func resourceWPEngineAccountUserDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-// 	var diags diag.Diagnostics
-//
-// 	client := m.(*client.ApiClient)
-//
-// 	userID := d.Id()
-//
-// 	err := client.DeleteAccountUser(userID)
-// 	if err != nil {
-// 		return diag.FromErr(err)
-// 	}
-//
-// 	// Remove the user ID from the state as it no longer exists
-// 	d.SetId("")
-//
-// 	return diags
-// }
+	// Get the user ID from the resource data
+	userID := d.Id()
+
+	// Call the client method to get the user details
+	user, err := client.GetAccountUser(userID)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	// Set the resource data from the user details
+	d.Set("first_name", user["first_name"])
+	d.Set("last_name", user["last_name"])
+	d.Set("email", user["email"])
+
+	return diags
+}
+
+func resourceWPEngineAccountUserUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	// var diags diag.Diagnostics
+
+	client := m.(*client.ApiClient)
+
+	userID := d.Id()
+
+	// Check which fields have changed
+	if d.HasChanges("first_name", "last_name", "email") {
+		userData := map[string]interface{}{
+			"first_name": d.Get("first_name").(string),
+			"last_name":  d.Get("last_name").(string),
+			"email":      d.Get("email").(string),
+		}
+
+		// Call the client method to update the user details
+		_, err := client.UpdateAccountUser(userID, userData)
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
+	// Call read to update the state
+	return resourceWPEngineAccountUserRead(ctx, d, m)
+}
+
+func resourceWPEngineAccountUserDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	client := m.(*client.ApiClient)
+
+	userID := d.Id()
+
+	err := client.DeleteAccountUser(userID)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	// Remove the user ID from the state as it no longer exists
+	d.SetId("")
+
+	return diags
+}
 
 // end resourceWPEngineAccountUser
