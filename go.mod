@@ -1,4 +1,4 @@
-module github.com/hashicorp/terraform-provider-wpengine
+module github.com/drzln/terraform-provider-wpengine
 
 go 1.18
 

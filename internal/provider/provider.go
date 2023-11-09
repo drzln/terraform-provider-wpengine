@@ -1,5 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) drzln, LOL.
 
 package provider
 
@@ -8,6 +7,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/drzln/terraform-provider-wpengine/client"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -33,13 +33,13 @@ func New(version string) func() *schema.Provider {
 				"wpengine_data_source": dataSourceScaffolding(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"wpengine_account":      resourceWPEngineAccount(),
+				// "wpengine_account":      resourceWPEngineAccount(),
 				"wpengine_account_user": resourceWPEngineAccountUser(),
-				"wpengine_site":         resourceWPEngineSite(),
-				"wpengine_install":      resourceWPEngineInstall(),
-				"wpengine_domain":       resourceWPEngineDomain(),
-				"wpengine_ssh_key":      resourceWPEngineSshKey(),
-				"wpengine_cdn":          resourceWPEngineCdn(),
+				// "wpengine_site":         resourceWPEngineSite(),
+				// "wpengine_install":      resourceWPEngineInstall(),
+				// "wpengine_domain":       resourceWPEngineDomain(),
+				// "wpengine_ssh_key":      resourceWPEngineSshKey(),
+				// "wpengine_cdn":          resourceWPEngineCdn(),
 				// potentially unCRUDable
 				// "wpengine_cache": resourceWPEngineCache(),
 				// "wpengine_backup": resourceWPEngineBackup(),
@@ -47,65 +47,29 @@ func New(version string) func() *schema.Provider {
 		}
 
 		p.ConfigureContextFunc = configure(version, p)
-
 		return p
 	}
 }
 
 // #############################################################################
-// resourceWPEngineAccountUser
+// resourceWPEngineAccount
 // #############################################################################
 
-func resourceWPEngineAccountUser() *schema.Resource {
-	return &schema.Resource{
-		CreateContext: resourceWPEngineAccountUserCreate,
-		// ReadContext:   resourceWPEngineAccountUserRead,
-		// UpdateContext: resourceWPEngineAccountUserUpdate,
-		// DeleteContext: resourceWPEngineAccountUserDelete,
-	}
-}
-
-func resourceWPEngineAccountUserCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	var diags diag.Diagnostics
-
-	client := m.(*apiClient)
-
-	accountID := d.Get("account_id").(string)
-	userData := map[string]interface{}{
-		"first_name": d.Get("first_name").(string),
-		"last_name":  d.Get("last_name").(string),
-		"email":      d.Get("email").(string),
-	}
-
-	user, err := client.CreateAccountUser(accountID, userData)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	d.SetId(user["user_id"].(string))
-	return diags
-}
-
-// func resourceWPEngineAccountUserRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-// 	// Implement user read logic using the API client
+// func resourceWPEngineAccount() *schema.Resource {
+// 	return &schema.Resource{
+// 		CreateContext: resourceWPEngineAccountCreate,
+// 		// ReadContext:   resourceWPEngineAccountRead,
+// 		// UpdateContext: resourceWPEngineAccountUpdate,
+// 		// DeleteContext: resourceWPEngineAccountDelete,
+// 	}
 // }
 
-// func resourceWPEngineAccountUserUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-// 	// Implement user update logic using the API client
-// }
+// end resourceWPEngineAccount
 
-//	func resourceWPEngineAccountUserDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-//		// Implement user deletion logic using the API client
-//	}
-func resourceWPEngineAccount() {}
 
-// end resourceWPEngineAccountUser
-
-type apiClient struct {
-	// Add whatever fields, client or connection info, etc. here
-	// you would need to setup to communicate with the upstream
-	// API.
-}
+// ############################################################################
+// config
+// ############################################################################
 
 func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (any, diag.Diagnostics) {
 	return func(context.Context, *schema.ResourceData) (any, diag.Diagnostics) {
@@ -113,6 +77,8 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 		// userAgent := p.UserAgent("terraform-provider-wpengine", version)
 		// TODO: myClient.UserAgent = userAgent
 
-		return &apiClient{}, nil
+		return &client.ApiClient{}, nil
 	}
 }
+
+// end config

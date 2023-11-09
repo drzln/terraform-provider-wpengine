@@ -12,19 +12,19 @@ const (
 	baseURL = "https://api.wpengineapi.com/v1"
 )
 
-type apiClient struct {
+type ApiClient struct {
 	apiKey     string
 	httpClient *http.Client
 }
 
-func NewClient(apiKey string) *apiClient {
-	return &apiClient{
+func NewClient(apiKey string) *ApiClient {
+	return &ApiClient{
 		apiKey:     apiKey,
 		httpClient: &http.Client{},
 	}
 }
 
-func (c *apiClient) doRequest(req *http.Request) ([]byte, error) {
+func (c *ApiClient) doRequest(req *http.Request) ([]byte, error) {
 	req.Header.Set("Authorization", "Bearer "+c.apiKey)
 	req.Header.Set("Content-Type", "application/json")
 
@@ -47,7 +47,7 @@ func (c *apiClient) doRequest(req *http.Request) ([]byte, error) {
 	return body, nil
 }
 
-func (c *apiClient) CreateAccountUser(accountID string, userData map[string]interface{}) (map[string]interface{}, error) {
+func (c *ApiClient) CreateAccountUser(accountID string, userData map[string]interface{}) (map[string]interface{}, error) {
 	userEndpoint := fmt.Sprintf("%s/accounts/%s/account_users", baseURL, accountID)
 
 	userDataBytes, err := json.Marshal(userData)
